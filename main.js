@@ -1,0 +1,3 @@
+const links=[...document.querySelectorAll('nav a')];function activate(id){links.forEach(a=>{const active=a.hash==='#'+id;a.classList.toggle('active',active);if(active)a.setAttribute('aria-current','location');else a.removeAttribute('aria-current')})}
+links.forEach(a=>a.addEventListener('click',()=>activate(a.hash.slice(1))));
+const observer=new IntersectionObserver(entries=>{const visible=entries.filter(e=>e.isIntersecting);if(visible.length)activate(visible[0].target.id)},{rootMargin:'-18% 0px -60% 0px',threshold:0});document.querySelectorAll('main section').forEach(s=>observer.observe(s));window.addEventListener('hashchange',()=>activate(location.hash.slice(1)));if(location.hash)activate(location.hash.slice(1));
